@@ -2,17 +2,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Load the dataset
+# Load the data_cleanset
 data = pd.read_csv('HW2\CreditCard.csv')
+data_clean = data.dropna()
 
 # Encode categorical variables
-data['Gender'] = data['Gender'].map({'M': 1, 'F': 0})
-data['CarOwner'] = data['CarOwner'].map({'Y': 1, 'N': 0})
-data['PropertyOwner'] = data['PropertyOwner'].map({'Y': 1, 'N': 0})
+data_clean.loc[:, 'Gender'] = data_clean['Gender'].map({'M': 1, 'F': 0})
+data_clean.loc[:, 'CarOwner'] = data_clean['CarOwner'].map({'Y': 1, 'N': 0})
+data_clean.loc[:, 'PropertyOwner'] = data_clean['PropertyOwner'].map({'Y': 1, 'N': 0})
 
 # Features and target
-X = data[['Gender', 'CarOwner', 'PropertyOwner', '#Children', 'WorkPhone', 'Email_ID']].values
-y = data['CreditApprove'].values
+X = data_clean[['Gender', 'CarOwner', 'PropertyOwner', '#Children', 'WorkPhone', 'Email_ID']].values
+y = data_clean['CreditApprove'].values
 
 # Error function definition
 def error_function(w, X, y):
@@ -30,7 +31,7 @@ def get_adjacent_solutions(w):
     return adjacent_solutions
 
 # Hill climbing local search
-def hill_climbing(X, y, max_rounds=100):
+def hill_climbing(X, y, max_rounds=340):
     w = np.array([-1, -1, -1, -1, -1, -1])  # Initial solution
     error_history = []
     
@@ -52,24 +53,25 @@ def hill_climbing(X, y, max_rounds=100):
         
         # If no improvement, break the loop
         if best_error == current_error:
+            print(f"No improvement found in round {round_num}, stopping search.")
             break
         
         # Update w to the best solution found
         w = best_solution
     
+    print(f"Optimal solution found: w = {w}, error = {best_error}")
     return w, current_error, error_history
 
 # Run hill climbing search
-optimal_w, final_error, error_history = hill_climbing(X, y, max_rounds=100)
+optimal_w, final_error, error_history = hill_climbing(X, y, max_rounds=340)
 
 # Plotting the error vs. rounds
-plt.plot(error_history)
-plt.title('Error vs. Search Round (Hill Climbing)')
-plt.xlabel('Round of Search')
-plt.ylabel('Error')
-plt.grid(True)
-plt.show()
-
-# Output the optimal weights and final error
-print(f"Optimal w: {optimal_w}")
-print(f"Final error: {final_error}")
+if error_history:
+    plt.plot(error_history)
+    plt.title('Error vs. Search Round (Hill Climbing)')
+    plt.xlabel('Round of Search')
+    plt.ylabel('Error')
+    plt.grid(True)
+    plt.show()
+else:
+    print("No error history to plot.")
