@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load the data_cleanset
-data = pd.read_csv('HW2\CreditCard.csv')
+data = pd.read_csv('HW2/CreditCard.csv')
 data_clean = data.dropna()
 
 # Encode categorical variables
@@ -32,7 +32,8 @@ def get_adjacent_solutions(w):
 
 # Hill climbing local search
 def hill_climbing(X, y, max_rounds=340):
-    w = np.array([-1, -1, -1, -1, -1, -1])  # Initial solution
+    w = np.random.choice([-1, 1], size=6) # Random initial solution
+    print(f"Random initial solution: w = {w}")
     error_history = []
     
     for round_num in range(max_rounds):
