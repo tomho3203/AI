@@ -1,0 +1,142 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{lipsum,url} 
+\usepackage{fullpage} 
+\usepackage{color}
+\usepackage{algorithm,algorithmic}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{comment}
+
+% ----- math theorem ----- %
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{exmp}{Example}[section]
+
+\usepackage{amssymb}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{center}
+\Large  CS4013/5013 Assignment 6\\[1em]
+\large Fall 2024\\[1em] 
+\end{center}
+
+\vspace{5pt}
+
+Due Date: Nov 18, 2024. 
+
+In this assignment, we implement a Markov 
+decision process algorithm which is policy 
+iteration plus Monte Carlo. See detailed 
+algorithm in the last page of `1104\_mod7a.pdf'. 
+
+Apply your algorithm to estimate 
+the utility of each state in the grid world 
+in Figure \ref{fig:hw6} (left) based on 
+the stochastic move in Figure \ref{fig:hw6} (right).  
+This move means, for example, if 
+the agent takes action ``up'', 
+60\% chance it will end up moving 
+up, 20\% chance moving left, 10\% chance 
+moving right and 10\% chance moving down. 
+
+Remember, however, if an agent hits the wall or rock, 
+it stays in the current state. For example, if it 
+takes action UP at (2,1), 60\% chance it will stay 
+(by trying to go up but hit the rock), 20\% chance 
+it will move to (1,1), 10\% chance it will move to 
+(3,1) and 10\% chance it will stay (by trying to move 
+down but hit the wall) -- so the total chance to 
+stay is 60\% + 10\% = 70\%.
+
+\vspace{5pt}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.3\textwidth]{figure/hw6_world.PNG} 
+\hspace{50pt}
+\includegraphics[width=.3\textwidth]{figure/hw6_move.PNG}
+\caption{Grid World and Stochastic Move}
+\label{fig:hw6}
+\end{figure}
+
+\vspace{5pt}
+\underline{Task 1. Use Monte Carlo to Estimate Utility}
+
+Implement first-visit Monte Carlo and use it to estimate 
+the utility of each non-terminal state based on the policy in Figure \ref{fig:hw6} (left) and stochastic move in Figure \ref{fig:hw6} (right). 
+Set discount rate $\gamma = 0.8$ and the reward at 
+each non-terminal state $r = -0.04$. 
+To estimate the utility of each state, run at 
+least 10 experiments. 
+Report your estimated utilities in the following table. 
+
+\begin{table}[h!]
+\centering
+\def\arraystretch{1.5}
+\setlength{\tabcolsep}{11pt}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c} \hline 
+State & (1,1) & (1,2) & (1,3) & (2,1) & (2,3) & 
+(3,1) & (3,2) & (3,3) & (4,1)\\ \hline
+Utility & & & & & & & & & \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{5pt}
+\underline{Task 2. Optimize policy 
+based on your estimates.}
+
+Based on your estimated utilities, 
+optimize your policy at each state 
+using Bellman's equation. 
+(See detailed method in page 31 or 35 of `1104\_mod7a.pdf'.) 
+You can write a program to automatically estimate 
+it or manually estimate it. In either case, 
+report your updated policy in the following table. 
+You may use R for right, L for left, U for up 
+and D for down. 
+
+\begin{table}[h!]
+\centering
+\def\arraystretch{1.5}
+\setlength{\tabcolsep}{9pt}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c} \hline 
+State & (1,1) & (1,2) & (1,3) & (2,1) & (2,3) & 
+(3,1) & (3,2) & (3,3) & (4,1)\\ \hline
+Old Policy & R & U & L & U & D & L & L & R & L \\ \hline
+New Policy & & & & & & & & & \\ \hline
+\end{tabular}
+\end{table}
+
+\vspace{5pt}
+\underline{Task 3. Some quiz questions will be 
+posed on Canvas. Complete them.}
+
+\newpage 
+
+\underline{Submissions Instructions}
+
+You should place the utility estimate table 
+and policy update table in a pdf file named 
+`hw6.pdf' and upload it to Canvas through the 
+submission page for hw6. 
+
+You can generate the pdf file using any tool, 
+although you are encouraged to generate it using 
+Overleaf. A latex template `hw6\_Latex.txt' will 
+be provided to you. 
+
+You also need to upload the code that generate 
+the utility estimate table. Set it to state (1,1). 
+Name this code as hw6\_task1.py. 
+
+
+\end{document}
