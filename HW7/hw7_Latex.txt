@@ -1,0 +1,134 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{lipsum,url} 
+\usepackage{fullpage} 
+\usepackage{color}
+\usepackage{algorithm,algorithmic}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{comment}
+
+% ----- math theorem ----- %
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{exmp}{Example}[section]
+
+\usepackage{amssymb}
+
+\setlength\parindent{0pt}
+\setlength{\parskip}{10pt}
+
+\begin{document}
+
+\begin{center}
+\Large  CS4013/5013 Assignment 7\\[1em]
+\large Fall 2024\\[1em] 
+\end{center}
+
+\vspace{5pt}
+
+Due Date: Dec 1, 2024. 
+
+In this assignment, we implement a multi-layer 
+perception (MLP) using the Python Scikit-Learn 
+library, and evaluate its classification accuracy 
+on the Diabetes data set. A template with detailed 
+instruction is given to you. 
+
+\underline{Task 1. Evaluate the Impact of Layer Size 
+on Classification Accuracy}
+
+Fix the number of layers to 5 and vary the number 
+of neurons per layer $k$. Report training error 
+and testing error versus $k$ in Figure \ref{fig:hw7a}. 
+Note the figure should contain two curves, one for 
+training error and the other for testing error. 
+Pick 5 values of $k$ by yourself. 
+
+Goal: you should aim to observe both underfitting 
+and overfitting in this figure. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics{}
+    \label{fig:hw7a}
+    \caption{}
+\end{figure}
+
+\underline{Task 2. Evaluate the Impact of Layer Depth 
+on Classification Accuracy}
+
+Fix the number of neurons per layer to a proper number 
+(picked by yourself) and vary the 
+number of layers $m$.  Report training error 
+and testing error versus $m$ in Figure \ref{fig:hw7b}. 
+Note the figure should contain two curves, one for 
+training error and the other for testing error. 
+Pick 5 values of $m$ by yourself. 
+
+Goal: you should aim to at least observe underfitting 
+in this figure. 
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics{}
+    \label{fig:hw7b}
+    \caption{}
+\end{figure}
+
+\underline{Task 3.  Evaluate the Impact of Activation 
+Function on Classification Accuracy}
+
+Fix both the number of layers and the number of neurons 
+per layer to proper numbers (picked by yourself) and vary the choice of activation functions between (1) identity, 
+(2) logistic, (3) tanh and (4) ReLU. Report training error 
+and testing error for each choice in Table \ref{tab:hw7}. 
+
+\begin{table}[h!]
+\centering
+\def\arraystretch{1.5}
+\setlength{\tabcolsep}{12pt}
+\begin{tabular}{c|c|c} \hline 
+\bf Activation Function 
+& \bf Training Error 
+& \bf Testing Error\\ \hline
+Identity & &\\ \hline
+Logistic & &\\ \hline
+Tanh & &\\ \hline
+ReLU & &\\ \hline
+\end{tabular}
+\end{table}
+
+\underline{Task 4. Quiz Questions}
+
+A set of quiz questions will be posted on Canvas. 
+
+\newpage 
+
+\underline{Submissions Instructions}
+
+You should generate 2 figures and 1 table, 
+place them all (sorted based on 
+task number) in a pdf file named `hw7.pdf' and 
+upload it to Canvas through the submission page for hw7. 
+
+You also need to upload the code that generate 
+the figures and table, including 
+
+-- hw7\_task1.py for Figure 1
+
+-- hw7\_task2.py for Figure 2
+
+-- hw7\_task3.py for Table 1 (set it to ReLU) 
+
+You can generate the pdf file using any tool, 
+although you are encouraged to generate it using 
+Overleaf. A latex template `hw7\_Latex.txt' will 
+be provided to you. 
+
+\end{document}
